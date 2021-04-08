@@ -13,6 +13,9 @@ public class APIController : MonoBehaviour
 
     APITime apiTime;
     Text clock;
+
+    float timer;
+    float waitTime = 1f;
     private string ReadJsonFromAPI(string URL)
     {
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create(URL);
@@ -36,7 +39,12 @@ public class APIController : MonoBehaviour
 
     private void Update()
     {
-        SetClock();
+        timer += Time.deltaTime;
+        if (timer > waitTime)
+        {
+            SetClock();
+            timer = 0;
+        }
     }
 
     private void SetClock()
