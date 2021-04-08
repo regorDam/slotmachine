@@ -25,7 +25,7 @@ public class FakeProgressbar : MonoBehaviour
         foreground.fillAmount = 1 - fakeCurrentTime / fakeTime;
         if (fakeCurrentTime < 0)
         {
-            SceneManager.LoadScene("Menu");
+            LevelManager.Instance.LoadMenu();
         }
     }
 }
