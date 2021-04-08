@@ -42,4 +42,9 @@ public class GameController : MonoBehaviour
     {
         LevelManager.Instance.LoadMenu();
     }
+
+    public void OnClickSpinBtn(GameObject button)
+    {
+        button.GetComponent<AudioSource>().Play();        
+    }
 }
