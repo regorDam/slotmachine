@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,7 +35,7 @@ public class APIController : MonoBehaviour
 
     private void Start()
     {
-        SetClock();
+        StartCoroutine(RunSetClock());
     }
 
     private void Update()
@@ -42,16 +43,19 @@ public class APIController : MonoBehaviour
         timer += Time.deltaTime;
         if (timer > waitTime)
         {
-            SetClock();
+            StartCoroutine(RunSetClock());
             timer = 0;
         }
     }
+    IEnumerator RunSetClock()
+    {
+        yield return SetClock();
+    }
 
-    private void SetClock()
+    private async Task SetClock()
     {
         JsonUtility.FromJsonOverwrite(ReadJsonFromAPI(MAIN_URL), apiTime);
         System.DateTime dateTime = System.DateTime.Parse(apiTime.datetime);
-        
-        clock.text = dateTime.ToString("yyyy-MM-dd hh:mm:ss");
+        clock.text = dateTime.ToString("yyyy-MM-dd hh:mm:ss");        
     }
 }

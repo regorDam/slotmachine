@@ -21,6 +21,7 @@ public class ButtonController : MonoBehaviour
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        _events[0].AddListener(OnClick);
     }
 
     void OnMouseDown()
@@ -42,5 +43,10 @@ public class ButtonController : MonoBehaviour
         {
             _event.Invoke();
         }
+    }
+
+    public void OnClick()
+    {
+        FindObjectOfType<GameController>().OnClickSpinBtn(this);
     }
 }

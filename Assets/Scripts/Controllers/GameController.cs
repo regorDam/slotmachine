@@ -21,6 +21,8 @@ public class GameController : MonoBehaviour
 
     AudioSource audioSource;
 
+    GameObject winGO;
+
     void Awake()
     {
         levelManager = LevelManager.Instance;
@@ -28,8 +30,12 @@ public class GameController : MonoBehaviour
         switch (levelManager.CurrentGameScene)
         {
             case 1:
+                Instantiate(Resources.Load("Prefabs/SlotMachine"), new Vector3(0,-1,0), Quaternion.identity);
                 unsortedList = GameObject.FindObjectsOfType<Scroller>();
                 scrollers = unsortedList.OrderBy(go => go.name).ToList();
+                winGO = GameObject.FindGameObjectWithTag("Win");
+                winGO.SetActive(false);
+                spinBtn = GameObject.FindObjectOfType<ButtonController>();
                 break;
             case 2:
                 Instantiate(Resources.Load("Prefabs/Prefabgame2"), Vector3.zero, Quaternion.identity);
@@ -67,6 +73,7 @@ public class GameController : MonoBehaviour
     public void OnClickSpinBtn(ButtonController go)
     {
         Console.Log("Spin");
+        winGO.SetActive(false);
         spinBtn = go;
         spinBtn.isEnabled = false;
         audioSource.clip = stopSpin;
@@ -129,6 +136,7 @@ public class GameController : MonoBehaviour
             {
                 audioSource.clip = win;
                 audioSource.Play();
+                winGO.SetActive(true);
             }
         }
     }
