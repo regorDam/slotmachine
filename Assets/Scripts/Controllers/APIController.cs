@@ -54,6 +54,7 @@ public class APIController : MonoBehaviour
 
     private async Task SetClock()
     {
+
         JsonUtility.FromJsonOverwrite(ReadJsonFromAPI(MAIN_URL), apiTime);
         System.DateTime dateTime = System.DateTime.Parse(apiTime.datetime);
         clock.text = dateTime.ToString("yyyy-MM-dd hh:mm:ss");        

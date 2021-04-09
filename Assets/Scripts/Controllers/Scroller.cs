@@ -56,7 +56,7 @@ public class Scroller : MonoBehaviour
     {
 		isStopped = true;
 
-		int randomKey = Random.Range(1, 2);
+		int randomKey = Random.Range(1, 5);
 		stoppedValue = randomKey;
 		float value;
 		symbols.TryGetValue(randomKey, out value);
