@@ -54,7 +54,7 @@ public class APIController : MonoBehaviour
             }
             else
             {
-                Console.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
+                //Console.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
                 JsonUtility.FromJsonOverwrite(webRequest.downloadHandler.text, apiTime);
                 System.DateTime dateTime = System.DateTime.Parse(apiTime.datetime);
                 clock.text = dateTime.ToString("yyyy-MM-dd hh:mm:ss");
